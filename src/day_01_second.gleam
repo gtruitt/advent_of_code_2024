@@ -8,7 +8,7 @@ import gleam/string
 import simplifile as file
 
 pub fn solve() {
-  file.read("/Users/gtruitt/Downloads/advent-2024-day-01.txt")
+  file.read("example_data/day_01")
   |> result.unwrap("")
   |> string.trim
   |> string.split("\n")
@@ -24,6 +24,7 @@ pub fn solve() {
   |> fn(p) { #(p.0, list.fold(p.1, dict.new(), increment)) }
   |> fn(p) { list.fold(p.0, 0, fn(acc, val) { acc_multiple(acc, val, p.1) }) }
   |> io.debug
+  // expecting 31
 }
 
 fn to_int(s: String) {

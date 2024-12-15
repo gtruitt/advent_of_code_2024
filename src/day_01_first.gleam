@@ -6,7 +6,7 @@ import gleam/string
 import simplifile as file
 
 pub fn solve() {
-  file.read("/Users/gtruitt/Downloads/advent-2024-day-01.txt")
+  file.read("example_data/day_01")
   |> result.unwrap("")
   |> string.trim
   |> string.split("\n")
@@ -23,6 +23,7 @@ pub fn solve() {
   |> fn(p) { list.map2(p.0, p.1, fn(a, b) { int.absolute_value(a - b) }) }
   |> int.sum
   |> io.debug
+  // expecting 11
 }
 
 fn to_int(s: String) {

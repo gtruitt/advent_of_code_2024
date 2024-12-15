@@ -7,7 +7,7 @@ import gleam/string
 import simplifile as file
 
 pub fn solve() {
-  file.read("/Users/gtruitt/Downloads/advent-2024-day-02.txt")
+  file.read("example_data/day_02")
   |> result.unwrap("")
   |> string.trim
   |> string.split("\n")
@@ -17,6 +17,7 @@ pub fn solve() {
   |> list.map(bool.to_int)
   |> int.sum
   |> io.debug
+  // expecting 2
 }
 
 fn to_int(s: String) {
