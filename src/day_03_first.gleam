@@ -15,7 +15,7 @@ pub fn solve() {
   |> list.map(fn(p) { p.0 * p.1 })
   |> int.sum
   |> io.debug
-  // expecting ?
+  // expecting 161
 }
 
 fn get_muls(s: String) {
