@@ -8,8 +8,7 @@ import gleam/string
 import simplifile as file
 
 pub fn solve() {
-  file.read("/Users/gtruitt/Downloads/advent-2024-day-03.txt")
-  //file.read("example_data/day_03_second")
+  file.read("example_data/day_03_second")
   |> result.unwrap("")
   |> string.trim
   |> get_total
