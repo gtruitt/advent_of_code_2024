@@ -2,7 +2,7 @@ import gleam/int
 import gleam/io
 import gleam/list
 import gleam/option.{type Option, Some}
-import gleam/regex
+import gleam/regexp
 import gleam/result
 import gleam/string
 import simplifile as file
@@ -18,12 +18,14 @@ pub fn solve() {
 
 fn get_total(s: String) {
   let assert Ok(re) =
-    regex.from_string("mul\\((\\d{1,3}),(\\d{1,3})\\)|(do\\(\\))|(don't\\(\\))")
-  regex.scan(re, s)
+    regexp.from_string(
+      "mul\\((\\d{1,3}),(\\d{1,3})\\)|(do\\(\\))|(don't\\(\\))",
+    )
+  regexp.scan(re, s)
   |> process_muls("do()", 0)
 }
 
-fn process_muls(l: List(regex.Match), last_cmd: String, total: Int) {
+fn process_muls(l: List(regexp.Match), last_cmd: String, total: Int) {
   case l {
     [] -> total
     [head, ..tail] ->
