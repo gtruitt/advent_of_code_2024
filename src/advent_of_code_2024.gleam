@@ -1,5 +1,5 @@
-import day_04_first
+import day_04_second
 
 pub fn main() {
-  day_04_first.solve()
+  day_04_second.solve()
 }
