@@ -1,6 +1,6 @@
 import birl
 import birl/duration
-import day_07_first.{solve}
+import day_07_second.{solve}
 import gleam/io
 
 pub fn main() {
