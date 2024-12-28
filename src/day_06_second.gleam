@@ -1,6 +1,9 @@
+import gleam/bool
 import gleam/dict
+import gleam/int
 import gleam/io
 import gleam/list
+import gleam/otp/task
 import gleam/result
 import gleam/string
 import simplifile as file
@@ -15,20 +18,19 @@ pub fn solve() {
   |> fn(lab) {
     let origin = lab.guard.point
     let patrolled = patrol(lab)
-    list.fold(dict.keys(patrolled.map), 0, fn(acc, point) {
+    list.fold(dict.keys(patrolled.map), [], fn(acc, point) {
       case point == origin, dict.get(patrolled.map, point) {
         False, Ok("X") -> {
-          let new_lab =
-            patrol(Lab(..lab, map: dict.insert(lab.map, point, "#")))
-          case new_lab.has_loop {
-            False -> acc
-            True -> acc + 1
-          }
+          let lab_n = Lab(..lab, map: dict.insert(lab.map, point, "#"))
+          [task.async(fn() { patrol(lab_n) }), ..acc]
         }
         _, _ -> acc
       }
     })
   }
+  |> list.map(task.await_forever)
+  |> list.map(fn(lab) { bool.to_int(lab.has_loop) })
+  |> int.sum
   |> io.debug
   // expecting 6
 }
